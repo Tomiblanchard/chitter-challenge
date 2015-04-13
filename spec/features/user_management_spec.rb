@@ -7,8 +7,8 @@ feature "User signs up" do
 
   scenario "when being a new user visiting the site" do
     expect{ sign_up }.to change(User, :count).by(1)
-    expect(page).to have_content("Signed in as Chris")
-    expect(User.first.email).to eq("chris@hello.com")
+    expect(page).to have_content("Signed in as Tomi")
+    expect(User.first.email).to eq("tomiblanchard@gmail.com")
   end
 
   scenario "with a password that doesn't match" do
@@ -35,24 +35,24 @@ feature "User signs in" do
   include SessionHelpers
 
   before(:each) do
-    User.create(:username => "Chris",
-                :email => "chris@chris.com",
+    User.create(:username => "Tomi",
+                :email => "tomiblanchard@gmail.com",
                 :password => 'password',
                 :password_confirmation => 'password')
   end
 
   scenario "with correct credentials" do
     visit '/'
-    expect(page).not_to have_content("Signed in as Chris")
-    sign_in('chris@chris.com', 'password')
-    expect(page).to have_content("Signed in as Chris")
+    expect(page).not_to have_content("Signed in as Tomi")
+    sign_in('tomiblanchard@gmail.com', 'password')
+    expect(page).to have_content("Signed in as Tomi")
   end
 
   scenario "with incorrect credentials" do
     visit '/'
-    expect(page).not_to have_content("Signed in as Chris")
-    sign_in('chris@chris.com', 'wrong')
-    expect(page).not_to have_content("Signed in as Chris")
+    expect(page).not_to have_content("Signed in as Tomi")
+    sign_in('tomiblanchard@gmail.com', 'wrong')
+    expect(page).not_to have_content("Signed in as Tomi")
   end
 
 end
@@ -62,17 +62,17 @@ feature 'User signs out' do
   include SessionHelpers
 
   before do
-    User.create(:username => "Chris",
-                :email => "chris@chris.com",
+    User.create(:username => "Tomi",
+                :email => "tomiblanchard@gmail.com",
                 :password => 'password',
                 :password_confirmation => 'password')
   end
 
   scenario 'while being signed in' do
-    sign_in('chris@chris.com', 'password')
+    sign_in('tomiblanchard@gmail.com', 'password')
     click_button "Sign out"
     expect(page).to have_content("Good bye!")
-    expect(page).not_to have_content("Signed in as Chris")
+    expect(page).not_to have_content("Signed in as Tomi")
   end
 
 end
@@ -82,16 +82,16 @@ feature "other URI's redirect to home if user is signed in" do
   include SessionHelpers
 
   before do
-    User.create(:username => "Chris",
-                :email => "chris@chris.com",
+    User.create(:username => "Tomi",
+                :email => "tomiblanchard@gmail.com",
                 :password => 'password',
                 :password_confirmation => 'password')
   end
 
   scenario 'while being signed in try to visit sign in page' do
-    sign_in('chris@chris.com', 'password')
+    sign_in('tomiblanchard@gmail.com', 'password')
     visit '/sessions/new'
-    expect(page).to have_content("Signed in as Chris")
+    expect(page).to have_content("Signed in as Tomi")
   end
 
 end

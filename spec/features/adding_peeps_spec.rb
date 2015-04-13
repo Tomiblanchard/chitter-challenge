@@ -5,19 +5,19 @@ feature 'user adds a new peep' do
 
   include SessionHelpers
     before do
-    User.create(:username => "Chris",
-                :email => "chris@chris.com",
+    User.create(:username => "Tomi",
+                :email => "tomiblanchard@gmail.com",
                 :password => 'password',
                 :password_confirmation => 'password')
   end
 
   scenario "adding a new peep" do
-    sign_in('chris@chris.com', 'password')
+    sign_in('tomiblanchard@gmail.com', 'password')
     expect(Peep.count).to eq(0)
     add_peep("Just adding a peep", DateTime.now)
     expect(Peep.count).to eq(1)
     peep = Peep.first
-    expect(peep.author).to eq("Chris")
+    expect(peep.author).to eq("Tomi")
   end
 
   def add_peep(content, time=DateTime.now)

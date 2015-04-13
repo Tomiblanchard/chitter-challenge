@@ -1,7 +1,13 @@
 post '/peeps' do
-  content = params["content"]
-  author = params["author"]
-  datetime = DateTime.now
-  Peep.create(:content => content, :author => author, :created_at => datetime)
-  redirect to ('/')
+  @peep = peep.create
+  if @peep.save
+    redirect to('/')
+  else
+    flash.now[:errors] = @peep.errors.full_messages
+    erb :peep
+  end
+end
+
+get '/sessions/peep' do
+  erb :peep
 end

@@ -6,7 +6,7 @@ gem 'sinatra'
 gem 'rack-flash3'
 gem 'data_mapper'
 gem 'database_cleaner'
-gem 'dm-postgres-adapter'
+gem 'dm-postgres-adapter', :require => true
 gem 'shotgun'
 gem 'rake'
 gem 'sinatra-partial', '~> 0.4.0', require: 'sinatra/partial'

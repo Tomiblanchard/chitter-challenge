@@ -1,7 +1,4 @@
 get '/sessions/new' do
-  if session[:user_id]
-    redirect to ('/')
-  end
   erb :"sessions/new"
 end
 
@@ -18,7 +15,7 @@ post '/sessions' do
 end
 
 delete '/sessions' do
-  flash[:notice] = "Good bye!"
-  session[:user_id] = nil
-  erb :"sessions/new"
+  session.clear
+  redirect "/"
+  flash.now[:notice] = "You've been log-out!"
 end

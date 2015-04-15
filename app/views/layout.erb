@@ -2,27 +2,12 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
-    <link href='http://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="/css/application.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/css/application.css"> -->
     <title>Chitter</title>
   </head>
 
   <body>
-
-    <% if flash[:errors] && !flash[:errors].empty? %>
-      Sorry, there were the following problems with the form.
-      <ul id="errors">
-        <% flash[:errors].each do |error| %>
-          <li><%= error %></li>
-        <% end %>
-      </ul>
-    <% end %>
-
-    <% if flash[:notice] %>
-      <div id="notice">
-      <%= flash[:notice] %>
-      </div>
-    <% end %>
 
     <nav id="navigation-menu">
       <a href="/" title="Return to the homepage" id="logo">

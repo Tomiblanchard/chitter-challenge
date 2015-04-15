@@ -4,26 +4,29 @@ require_relative 'helpers/session'
 feature 'user adds a new peep' do
 
   include SessionHelpers
-    before do
-    User.create(:username => "Tomi",
-                :email => "tomiblanchard@gmail.com",
-                :password => 'password',
-                :password_confirmation => 'password')
-  end
+    before(:each) do
+      User.create(:username => "Tomi",
+                  :email => "tomiblanchard@gmail.com",
+                  :password => 'password',
+                  :password_confirmation => 'password')
+    end
 
-  scenario "adding a new peep" do
+  scenario "with correct credentials" do
+    visit '/'
     sign_in('tomiblanchard@gmail.com', 'password')
+    expect(page).to have_content("Welcome back")
     expect(Peep.count).to eq(0)
-    add_peep("Just adding a peep", DateTime.now)
+    visit '/'
+    add_peep("Hello, this is my first tweet", "Tomi")
     expect(Peep.count).to eq(1)
     peep = Peep.first
-    expect(peep.author).to eq("Tomi")
+    expect(peep.message).to eq("Hello, this is my first tweet")
   end
 
-  def add_peep(content, time=DateTime.now)
+  def add_peep(message, user)
     within('#new-peep') do
-      fill_in 'content', :with => content
-      click_button 'Peep!'
+      fill_in 'message', :with => message
+      click_button 'Send peep'
     end
   end
 
